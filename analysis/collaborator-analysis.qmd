@@ -24,3 +24,39 @@ lobster_traps <- read_csv(here::here("data/Lobster_Trap_Counts_All_Years_2021051
 glimpse(lobster_traps)
 ```
 
+Convert missing values
+
+```{r}
+lobster_traps <- lobster_traps %>% 
+    mutate(TRAPS = na_if(TRAPS, -99999))
+```
+ 
+ Create a new dataset that does not include Naples reef data.  If integer(0). appears then there is no Naples data
+ 
+```{r}
+not_napl <- lobster_traps %>% 
+    filter(SITE != "NAPL")
+
+which (not_napl$SITE == "NAPL")
+
+```
+ Create Carp data set
+ 
+```{r}
+carp_20_traps <- lobster_traps %>% 
+    filter(SITE == "CARP" & TRAPS > 20)
+```
+ 
+Finding max number of traps and group by site and month
+
+```{r}
+
+
+max_traps <- lobster_traps %>% 
+  group_by(SITE, MONTH) %>% 
+  summarize(MAX_TRAPS = max(TRAPS, na.rm = TRUE))
+
+head(max_traps)
+
+```
+
