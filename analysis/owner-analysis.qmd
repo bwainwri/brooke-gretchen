@@ -49,6 +49,19 @@ max_lobster <- lobster_abundance %>%
 head(max_lobster)
 ```
 
+## Exercise: Data Visualization
+
+Left off at section 16.0.1
+
+```{r}
+#| warning: false
+#| message: false
+
+ggplot(data = lobster_abundance, 
+       aes(x = SIZE_MM)) +
+    geom_histogram() +
+    facet_wrap(~SITE)
+```
 
 
 
